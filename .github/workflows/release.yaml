@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   release:
-    if: github.repository == 'REPLACE_WITH_OWNER/REPOSITORY'
+    if: github.repository == 'mp-lb/fssstack-start'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
