@@ -1,0 +1,30 @@
+{
+  "name": "@mp-lb/fssstack-cli",
+  "version": "0.0.1",
+  "private": false,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "fssstack": "./dist/index.js"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "package.json",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc --project tsconfig.build.json && chmod +x dist/index.js",
+    "typecheck": "tsc --project tsconfig.json --noEmit",
+    "test": "vitest run"
+  }
+}

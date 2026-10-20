@@ -1,0 +1,32 @@
+version: 1
+project: fssstack-start
+environment: mp-lb
+repository: mp-lb/fssstack-start
+approved: true
+vercel:
+  sites:
+    frontend:
+      mode: new
+      creationApproved: true
+      projectName: arcnet.fssstack-start.frontend
+      root: apps/frontend
+      build: [ pnpm, --filter, "@mp-lb/fssstack-start-frontend", build ]
+      output: apps/frontend/dist
+      outputConfig:
+        version: 3
+        routes:
+          - handle: filesystem
+          - src: "/(.*)"
+            dest: /index.html
+variables:
+  store: mp-lb/mp-lb
+  paths:
+    - /admin/standard-variables.json
+secrets:
+  sources:
+    - key: ARCNET_STANDARD_SECRETS_KEY
+      store: mp-lb/mp-lb
+      path: /admin/standard-secrets.json.enc
+  consumers:
+    deploy:
+      VERCEL_TOKEN: VERCEL_API_TOKEN

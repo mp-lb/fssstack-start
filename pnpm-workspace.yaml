@@ -1,0 +1,11 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+
+allowBuilds:
+  esbuild: true
+  msw: true
+
+minimumReleaseAgeExclude:
+  - '@mp-lb/arcnet'
+  - '@mp-lb/zapper@0.21.8'

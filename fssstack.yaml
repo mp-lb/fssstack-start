@@ -1,0 +1,11 @@
+name: Fssstack Start
+slug: fssstack-start
+emoji: "🏃‍♂️"
+description: Configurator for Fssstack projects.
+packagePrefix: "@mp-lb"
+extensions: []
+backendServices: []
+frontendClients:
+  - slug: frontend
+    type: react-vite
+libraryPackages: []
