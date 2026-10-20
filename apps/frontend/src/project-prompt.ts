@@ -16,7 +16,7 @@ export const buildPrompt = (
 
 1. Start in an empty folder.
 2. Create \`fssstack.yaml\` from the YAML configuration shown below.
-3. Create \`forum.yaml\` with \`npx -y @mp-lb/forum-cli read --store mp-lb/fssstack forum.example.yaml > forum.yaml\`.
+3. Create \`.forum/sync.yaml\` with \`mkdir -p .forum && npx -y @mp-lb/forum-cli read --store mp-lb/fssstack sync.example.yaml > .forum/sync.yaml\`.
 4. Follow \`npx -y @mp-lb/forum-cli read SETUP_PROCESS.md\`.
 
 \`\`\`yaml
