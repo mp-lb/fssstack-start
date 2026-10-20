@@ -28,9 +28,8 @@ jobs:
       - run: pnpm lint && pnpm typecheck && pnpm test
       - run: pnpm build
       - name: Publish changed package builds
-        run: node scripts/auto-publish.mjs
+        run: pnpm exec arcnet env run --consumer publish -- node scripts/auto-publish.mjs
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          ARCNET_STANDARD_SECRETS_KEY: ${{ secrets.ARCNET_STANDARD_SECRETS_KEY }}
       - name: Verify exact public versions
         run: node scripts/verify-publication.mjs
