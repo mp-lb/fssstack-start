@@ -307,7 +307,7 @@ export function ProjectPromptBuilder() {
         <header className="flex flex-col gap-3 border-b pb-3 lg:flex-row lg:items-center lg:justify-between">
           <div className="min-w-0">
             <h1 className="flex items-center gap-2 text-2xl font-semibold tracking-normal sm:text-3xl">
-              <span aria-hidden="true">🧰</span>
+              <span aria-hidden="true">🏃‍♂️</span>
               Fssstack Start
             </h1>
           </div>
