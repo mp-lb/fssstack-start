@@ -11,6 +11,7 @@ const defaults = {
   slug: "my-app",
   emoji: "🚀",
   description: "",
+  githubRepository: "",
   packagePrefix: "@fssstack",
   shadcnPreset: defaultTheme,
   extensions: [],
@@ -23,6 +24,9 @@ const namePattern = /^[A-Za-z0-9 .,'&()/_:+#-]+$/;
 const slugPattern = /^[a-z]+(?:-[a-z]+)*$/;
 const npmOrgPattern = /^@[a-z0-9][a-z0-9-]*$/;
 const shadcnPresetPattern = /^[A-Za-z0-9_-]+$/;
+
+const githubRepositoryPattern =
+  /^[A-Za-z0-9][A-Za-z0-9_.-]*\/[A-Za-z0-9][A-Za-z0-9_.-]*$/;
 
 const emojiPattern =
   /^(?=.*(?:\p{Emoji_Presentation}|\p{Extended_Pictographic}))(?:\p{Emoji_Presentation}|\p{Extended_Pictographic}|\uFE0F|\u200D)+$/u;
@@ -67,6 +71,15 @@ export const projectPromptSchema = z
       .trim()
       .min(1, "Description is required.")
       .max(200, "Description must be 200 characters or fewer."),
+    githubRepository: z
+      .string()
+      .trim()
+      .min(3, "GitHub repository is required.")
+      .max(200, "GitHub repository is too long.")
+      .regex(
+        githubRepositoryPattern,
+        "Use owner/repository, like mp-lb/stackforge.",
+      ),
     packagePrefix: z
       .string()
       .trim()
@@ -195,6 +208,7 @@ export const normalizeProjectPromptConfig = (
   slug: toSlug(config.slug),
   emoji: config.emoji.trim(),
   description: config.description.trim(),
+  githubRepository: config.githubRepository.trim(),
   packagePrefix: config.packagePrefix.trim().toLowerCase(),
   shadcnPreset: config.shadcnPreset.trim(),
   extensions: [...new Set(config.extensions)],

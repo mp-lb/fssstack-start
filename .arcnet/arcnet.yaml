@@ -2,14 +2,12 @@ version: 1
 project: fssstack-start
 environment: mp-lb
 repository: mp-lb/fssstack-start
-approved: true
 vercel:
   dnsZone: mp-lb.dev
   sites:
     frontend:
       domain: fssstack.mp-lb.dev
       mode: new
-      creationApproved: true
       projectName: arcnet.fssstack-start.frontend
       root: apps/frontend
       build: [ pnpm, --filter, "@mp-lb/fssstack-start-frontend", build ]

@@ -11,19 +11,31 @@ describe("fssstack cli", () => {
   });
 
   it("renders the shared setup prompt from an argument", () => {
-    expect(runFssstackCli(["prompt", '{"description":"My app"}'])).toContain(
-      'description: "My app"',
-    );
+    expect(
+      runFssstackCli([
+        "prompt",
+        '{"description":"My app","githubRepository":"example/my-app"}',
+      ]),
+    ).toContain("githubRepository: example/my-app");
   });
 
   it("renders the shared setup prompt from stdin", () => {
-    expect(runFssstackCli(["prompt"], '{"description":"My app"}')).toContain(
-      "To start setup:",
-    );
+    expect(
+      runFssstackCli(
+        ["prompt"],
+        '{"description":"My app","githubRepository":"example/my-app"}',
+      ),
+    ).toContain("To start setup:");
   });
 
   it("reports invalid JSON", () => {
     expect(() => runFssstackCli(["prompt"], "{")).toThrow("Invalid JSON");
+  });
+
+  it("requires an owner and repository", () => {
+    expect(() =>
+      runFssstackCli(["prompt"], '{"description":"My app"}'),
+    ).toThrow("githubRepository");
   });
 
   it("prints help and version information", () => {

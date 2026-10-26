@@ -67,7 +67,7 @@ its findings to `docs/audits/YYYY-MM-DD-fssstack.md` in an isolated worktree for
 - `apps/frontend` contains the React/Vite frontend.
 - `packages/fssstack-cli` contains the `fssstack` shell command.
 - `etc/` contains shared TypeScript, Vitest, and tooling configuration.
-- `docs/` contains project standards and implementation guidance.
+- `docs/` contains project implementation guidance. Read shared standards directly from Forum with `fm read <file>.md --store mp-lb/dev`.
 - `zap.yaml` defines local services, ports, and common development tasks.
 
 ## Development Notes

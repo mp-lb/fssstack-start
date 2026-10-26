@@ -94,6 +94,8 @@ const projectFieldHelp = {
     "Combined with the project slug and app slugs to form workspace package names.",
   shadcnPreset: "Passed to the shadcn CLI when scaffolding frontend clients.",
   description: "Included in generated README content and app metadata.",
+  githubRepository:
+    "Used to scope the release workflow to this repository, for example mp-lb/stackforge.",
 }
 
 const fieldId = (path: PropertyKey[]) =>
@@ -137,6 +139,7 @@ export function ProjectPromptBuilder() {
       slug: toSlug(config.slug),
       emoji: config.emoji.trim(),
       description: config.description.trim(),
+      githubRepository: config.githubRepository.trim(),
       packagePrefix: config.packagePrefix.trim().toLowerCase(),
       shadcnPreset: config.shadcnPreset.trim(),
       backendServices: config.backendServices.map(toSlug),
@@ -438,6 +441,22 @@ export function ProjectPromptBuilder() {
                     onChange={(value) => {
                       markFieldInteracted(["shadcnPreset"])
                       setValue("shadcnPreset", value.trim())
+                    }}
+                  />
+                </div>
+                <div className="sm:col-span-6">
+                  <TextField
+                    label="GitHub repository"
+                    help={projectFieldHelp.githubRepository}
+                    value={config.githubRepository}
+                    error={errorFor(["githubRepository"])}
+                    required
+                    minLength={3}
+                    maxLength={200}
+                    placeholder="owner/repository"
+                    onChange={(value) => {
+                      markFieldInteracted(["githubRepository"])
+                      setValue("githubRepository", value)
                     }}
                   />
                 </div>

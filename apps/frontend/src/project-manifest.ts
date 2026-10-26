@@ -10,6 +10,7 @@ export const buildManifestYaml = (config: ProjectPromptConfig) => {
     name: config.name,
     emoji: config.emoji,
     description,
+    githubRepository: config.githubRepository,
     projectSlug: config.slug,
     packagePrefix: config.packagePrefix,
     shadcnPreset: config.shadcnPreset,
