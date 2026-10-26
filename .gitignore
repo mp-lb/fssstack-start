@@ -11,3 +11,4 @@ AGENTS_WORKTREE.md
 .fssstack-release-result.json
 /.forum/*
 !/.forum/sync.yaml
+**/.pnpm-store/
