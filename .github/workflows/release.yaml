@@ -29,10 +29,10 @@ jobs:
       - run: pnpm build
       - name: Publish changed package builds
         id: publish
-        run: pnpm exec arcnet env run --consumer publish -- node scripts/auto-publish.mjs
+        run: pnpm exec arcnet env run --consumer publish -- pnpm exec tsx packages/scripts/autoPublish.ts --github-output="$GITHUB_OUTPUT"
         env:
           ARCNET_STANDARD_SECRETS_KEY: ${{ secrets.ARCNET_STANDARD_SECRETS_KEY }}
       - name: Verify exact public versions
-        run: node scripts/verify-publication.mjs
+        run: pnpm exec tsx packages/scripts/verifyPublication.ts
         env:
           FSSSTACK_RELEASE_RESULT: ${{ steps.publish.outputs.release_report }}
