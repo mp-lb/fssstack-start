@@ -245,3 +245,7 @@ files and reference evidence, and avoid dumping raw diffs or secrets into the
 report. State what remains uncertain and how it could be resolved. Leave the
 temporary reference available for review and give its path in the handoff; do
 not delete it before the report can be checked.
+
+## Scripts
+
+Write project scripts in TypeScript in the package that owns the behaviour, or `packages/scripts` when there is no natural owner, and include them in normal lint and typecheck checks. Expose each script as a thin Zap task that invokes it with `tsx` (for example, `zap t somemigration` runs `packages/scripts/somemigration.ts`); keep CI callers aligned when moving scripts.

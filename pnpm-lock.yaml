@@ -155,6 +155,12 @@ importers:
         specifier: 8.17.1
         version: 8.17.1
 
+  packages/scripts:
+    devDependencies:
+      tsx:
+        specifier: 4.20.6
+        version: 4.20.6
+
 packages:
 
   '@babel/code-frame@7.29.7':
