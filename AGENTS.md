@@ -1,9 +1,12 @@
 <!-- Standard -->
+
 ## Agent context
 
 Agent instructions are compiled from reusable blocks in `context/`, with `context/index.md` listing the blocks in order. This keeps shared and project-specific instructions easy to maintain.
 
 Edit the blocks and index in `context/`, then run `zap task context-build` to regenerate `AGENTS.md` and `CLAUDE.md`.
+
+
 
 ## Code style
 
@@ -56,6 +59,7 @@ Use Zapper for processes and tasks: `zap status`, `zap up`, `zap logs <service> 
 Keep service names, dynamic ports and task commands in `zap.yaml`; do not hardcode development ports. Non-secret defaults live in `.env.local`; secrets belong in ignored `.env` or the configured secret source. Never put secret values in context.
 
 The canonical tool versions are `.node-version` and `package.json#packageManager`; preserve them when changing local tooling or CI.
+
 ### Local tool versions
 
 Mise is the base layer: it selects Node and the package manager. Zapper runs tasks and services on top of those tools. Run `mise trust` and `mise install` for checkout setup, then use an activated mise shell or `mise exec -- zap task <task>`.
@@ -66,9 +70,7 @@ Read Node from `.node-version` and pnpm from `package.json#packageManager`; `mis
 
 ## Validation
 
-Run `zap task check` for lint and typechecking, `zap task test` for relevant tests, and `zap task build` for build-sensitive changes. Run focused checks where the project provides them, and report any checks that could not run.
-
-Do not invent task names or claim that a build proves runtime behavior.
+Run the applicable configured checks, tests and builds; use `zap task check`, `zap task test` and `zap task build` where available. Run focused checks and follow project-specific validation instructions; report checks that could not run.
 
 
 
@@ -90,9 +92,12 @@ Keep only Fssstack Start-specific documents under `docs/`. This project has no d
 Read shared standards with `fm read <file>.md --store mp-lb/dev` (list them with `fm ls --store mp-lb/dev`). Read shared extensions with `fm read extensions/<extension>/README.md --store mp-lb/fssstack` (list them with `fm ls extensions --store mp-lb/fssstack`).
 
 For FSS Stack alignment audits, follow root `audit.md`.
+
 ## Delivery
 
-Push `main` to deploy the application and publish changed eligible npm packages; check the GitHub Actions runs.
+Push `main` to run the configured delivery workflows for applications and packages. Check GitHub Actions and follow any project-specific release exceptions.
+
+
 
 <!-- Project types -->
 
