@@ -6,9 +6,11 @@ allowBuilds:
   esbuild: true
   msw: true
 
-minimumReleaseAgeExclude:
-  - '@mp-lb/arcnet'
-  - '@mp-lb/zapper@0.21.8'
 
 # Save exact external versions; internal dependencies use workspace:*.
 saveExact: true
+
+# Consume our own releases immediately; age-check third-party packages.
+minimumReleaseAge: 1440
+minimumReleaseAgeExclude:
+  - '@mp-lb/*'
