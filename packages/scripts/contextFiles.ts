@@ -4,6 +4,7 @@ import {
   copyFileSync,
   existsSync,
   mkdtempSync,
+  readFileSync,
   rmSync,
   writeFileSync,
 } from "node:fs";
@@ -28,7 +29,12 @@ const outputs =
 
 if (command === "build") {
   const entry = findEntry();
-  runMdcompile([entry, "-o", "AGENTS.base.md", "--optional", "--silent"]);
+  runMdcompile([entry, "-o", "AGENTS.base.md", "--silent"]);
+  writeFileSync(
+    "AGENTS.base.md",
+    `${readFileSync("AGENTS.base.md", "utf8").trimEnd()}\n`,
+  );
+
   writeLocalFiles(outputs, options.extraContext);
 } else {
   if (options.extraContext.length > 0) {
@@ -137,6 +143,7 @@ function expandHome(path: string) {
 }
 
 function fail(message: string): never {
-  console.error(`${basename(process.argv[1])}: ${message}`);
+  const scriptName = basename(process.argv[1] ?? "contextFiles.ts");
+  console.error(`${scriptName}: ${message}`);
   process.exit(1);
 }
