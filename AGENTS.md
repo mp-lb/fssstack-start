@@ -7,7 +7,6 @@ Agent instructions are compiled from reusable blocks in `context/`, with `contex
 Edit the blocks and index in `context/`, then run `zap task context-build` to regenerate `AGENTS.md` and `CLAUDE.md`.
 
 
-
 ## Code style
 
 - Use PascalCase for components
@@ -40,6 +39,18 @@ FSS Stack Start provides the configurator and CLI for creating FSS Stack project
 
 Shared tooling is developed in sibling checkouts under `~/Work`: Zapper (`zapper`) runs tasks, Forum (`forum`) provides `fm`, Tools (`tools`) provides ArcNet, and Stackforge (`stackforge`) owns setup conventions. When a change belongs in an owned dependency, inspect and update that source repository as needed, follow its `AGENTS.md`, then rebuild/relink the CLI or update the consuming dependency. Verify the command resolves to the intended build.
 
+## Documentation
+
+Keep only Fssstack Start-specific documents under `docs/`. This project has no dedicated Forum store or sync configuration.
+
+For FSS Stack alignment audits, follow root `audit.md`.
+
+## Project UI
+
+Frontend packages: `apps/frontend`. Run component installation in the relevant package.
+
+Installed shadcn component locations: `apps/frontend/src/components/ui` (configuration: `apps/frontend/components.json`, theme: `apps/frontend/src/index.css`).
+
 ## Standards
 
 Read the relevant MAP Lab standards before changing the corresponding code. List them with `fm ls --store mp-lb/dev` and read one with `fm read <file>.md --store mp-lb/dev`.
@@ -49,7 +60,6 @@ Read the relevant MAP Lab standards before changing the corresponding code. List
 - `event-schema.md` and `event-sourcing.md`: event schemas and event-sourced domains.
 - `libs.md`, `lib-release.md` and `clis.md`: libraries, publishing and command-line tools.
 - For agent context, read `standards/context-files.md` from `mp-lb/fssstack`.
-
 
 
 ## Development
@@ -67,11 +77,9 @@ Mise is the base layer: it selects Node and the package manager. Zapper runs tas
 Read Node from `.node-version` and pnpm from `package.json#packageManager`; `mise.toml` reads these pins rather than duplicating them. npm projects use npm bundled with Node. Preserve the project's versions and package manager. Keep locally built CLI entrypoints in a version-independent PATH directory so switching Node does not hide `zap` or `fm`.
 
 
-
 ## Validation
 
 Run the applicable configured checks, tests and builds; use `zap task check`, `zap task test` and `zap task build` where available. Run focused checks and follow project-specific validation instructions; report checks that could not run.
-
 
 
 ## Scripts
@@ -79,24 +87,14 @@ Run the applicable configured checks, tests and builds; use `zap task check`, `z
 Write project scripts in TypeScript in the package that owns the behaviour, or `packages/scripts` when there is no natural owner, and include them in normal lint and typecheck checks. Expose each script as a thin Zap task that invokes it with `tsx` (for example, `zap t somemigration` runs `packages/scripts/somemigration.ts`); keep CI callers aligned when moving scripts.
 
 
-
 ## Documentation
 
 Keep project-specific documentation in `docs/` and update it with behavior changes. Follow the project's own instructions for any Forum sync mapping; read shared standards and extension setup from their Forum stores.
 
 
-## Documentation
-
-Keep only Fssstack Start-specific documents under `docs/`. This project has no dedicated Forum store or sync configuration.
-
-Read shared standards with `fm read <file>.md --store mp-lb/dev` (list them with `fm ls --store mp-lb/dev`). Read shared extensions with `fm read extensions/<extension>/README.md --store mp-lb/fssstack` (list them with `fm ls extensions --store mp-lb/fssstack`).
-
-For FSS Stack alignment audits, follow root `audit.md`.
-
 ## Delivery
 
 Push `main` to run the configured delivery workflows for applications and packages. Check GitHub Actions and follow any project-specific release exceptions.
-
 
 
 <!-- Project types -->
@@ -125,12 +123,6 @@ pnpm dlx shadcn@latest add https://shad.mp-lb.dev/r/ui-states.json
 
 CLI reference: https://ui.shadcn.com/docs/cli.
 
-
-## Project UI
-
-Frontend packages: `apps/frontend`. Run component installation in the relevant package.
-
-Installed shadcn component locations: `apps/frontend/src/components/ui` (configuration: `apps/frontend/components.json`, theme: `apps/frontend/src/index.css`).
 
 <!-- Extensions -->
 
