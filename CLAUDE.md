@@ -74,6 +74,7 @@ Set `private: true` in `package.json` for internal workspace packages; packages 
 Configured service domains: `fssstack.mp-lb.dev`. Their service mapping is in `.arcnet/arcnet.yaml`.
 
 <!-- Project types -->
+
 ## Frontend
 
 Use shadcn/ui consistently for supported UI patterns. Reuse installed components before creating anything new; when a suitable component is missing, install it through the CLI rather than hand-building a substitute. Use the existing `cn` utility for conditional classes.
@@ -90,7 +91,7 @@ pnpm dlx shadcn@latest add dialog
 
 Use the shared theme tokens and existing component variants for colors, typography, spacing and radii. UI consistency takes priority over making one screen look different. Do not override theme-owned styles in individual components without a concrete reason; make intentional design-system changes at the shared theme or component level.
 
-MAP Lab's Shad repository (`~/Work/shad`) provides additional components at `https://shad.mp-lb.dev`. Consult its catalog before building an equivalent, for example:
+MAP Lab's public Shad repository provides additional components at `https://shad.mp-lb.dev`. Consult its catalog before building an equivalent, for example:
 
 ```sh
 pnpm dlx shadcn@latest add https://shad.mp-lb.dev/r/ui-states.json
@@ -98,12 +99,12 @@ pnpm dlx shadcn@latest add https://shad.mp-lb.dev/r/ui-states.json
 
 CLI reference: https://ui.shadcn.com/docs/cli.
 
+
+## Project UI
+
 Frontend packages: `apps/frontend`. Run component installation in the relevant package.
 
 Installed shadcn component locations: `apps/frontend/src/components/ui` (configuration: `apps/frontend/components.json`, theme: `apps/frontend/src/index.css`).
-## Libraries and CLIs
-
-Keep public package boundaries explicit. After changing a CLI, build it and verify the installed command resolves to the intended local build. Update and validate public API/command documentation when behavior changes. Use the project's actual build, link and documentation tasks; do not assume tasks that have not been configured.
 
 <!-- Extensions -->
 ## ArcNet
