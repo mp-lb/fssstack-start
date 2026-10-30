@@ -28,8 +28,11 @@ jobs:
       - run: pnpm lint && pnpm typecheck && pnpm test
       - run: pnpm build
       - name: Publish changed package builds
+        id: publish
         run: pnpm exec arcnet env run --consumer publish -- node scripts/auto-publish.mjs
         env:
           ARCNET_STANDARD_SECRETS_KEY: ${{ secrets.ARCNET_STANDARD_SECRETS_KEY }}
       - name: Verify exact public versions
         run: node scripts/verify-publication.mjs
+        env:
+          FSSSTACK_RELEASE_RESULT: ${{ steps.publish.outputs.release_report }}
