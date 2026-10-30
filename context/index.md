@@ -2,6 +2,6 @@
 
 @delivery.md
 
-@../context/documentation.md
+@documentation.md
 
 @../audit.md

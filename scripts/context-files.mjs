@@ -113,13 +113,10 @@ function writeLocalFiles(outputs, extraContext) {
 }
 
 function findEntry() {
-  for (const entry of ["docs/etc/agents-md/index.md", "agents-md/index.md"]) {
-    if (existsSync(entry)) return entry;
-  }
+  const entry = "context/index.md";
+  if (existsSync(entry)) return entry;
 
-  fail(
-    "no context source found: expected docs/etc/agents-md/index.md or agents-md/index.md",
-  );
+  fail(`no context source found: expected ${entry}`);
 }
 
 function ensureFile(path) {
