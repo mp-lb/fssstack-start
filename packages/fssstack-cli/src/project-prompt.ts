@@ -18,8 +18,8 @@ export const buildPrompt = (
 
 1. Start in an empty folder.
 2. Create \`fssstack.yaml\` from the YAML configuration shown below.
-3. Create \`.forum/sync.yaml\` with \`mkdir -p .forum && npx -y @mp-lb/forum-cli read --store mp-lb/fssstack sync.example.yaml > .forum/sync.yaml\`.
-4. Follow \`npx -y @mp-lb/forum-cli read SETUP_PROCESS.md\`.
+3. Follow \`npx -y @mp-lb/forum-cli read SETUP_PROCESS.md --store mp-lb/fssstack\`.
+4. Read shared standards and extensions remotely as instructed; do not create a Forum sync configuration or local mirrors of skills or examples.
 
 \`\`\`yaml
 ${buildManifestYaml(config)}

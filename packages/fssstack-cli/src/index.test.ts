@@ -28,6 +28,17 @@ describe("fssstack cli", () => {
     ).toContain("To start setup:");
   });
 
+  it("reads setup remotely without creating a documentation checkout", () => {
+    const prompt = runFssstackCli(
+      ["prompt"],
+      '{"description":"My app","githubRepository":"example/my-app"}',
+    );
+
+    expect(prompt).toContain("read SETUP_PROCESS.md --store mp-lb/fssstack");
+    expect(prompt).not.toContain("mkdir -p .forum");
+    expect(prompt).not.toContain("sync.example.yaml");
+  });
+
   it("reports invalid JSON", () => {
     expect(() => runFssstackCli(["prompt"], "{")).toThrow("Invalid JSON");
   });
