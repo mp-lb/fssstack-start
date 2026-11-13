@@ -1,8 +1,34 @@
+import { spawnSync } from "node:child_process";
+import { mkdtempSync, rmSync, symlinkSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 
 import { runFssstackCli } from ".";
 
 describe("fssstack cli", () => {
+  it("runs through the executable symlink used by npm", () => {
+    const root = mkdtempSync(join(tmpdir(), "fssstack-cli-"));
+
+    try {
+      const bin = join(root, "fssstack");
+      symlinkSync(
+        fileURLToPath(new URL("../dist/index.js", import.meta.url)),
+        bin,
+      );
+
+      const result = spawnSync(process.execPath, [bin, "--help"], {
+        encoding: "utf8",
+      });
+
+      expect(result.status).toBe(0);
+      expect(result.stdout).toContain("fssstack schema");
+    } finally {
+      rmSync(root, { recursive: true, force: true });
+    }
+  });
+
   it("prints the shared JSON Schema", () => {
     const schema = JSON.parse(runFssstackCli(["schema"]));
 

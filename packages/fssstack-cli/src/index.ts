@@ -2,7 +2,8 @@
 
 /* eslint-disable import/extensions -- emitted Node ESM imports require .js */
 
-import { readFileSync } from "node:fs";
+import { readFileSync, realpathSync } from "node:fs";
+import { pathToFileURL } from "node:url";
 
 import {
   normalizeProjectPromptConfig,
@@ -111,6 +112,9 @@ const main = async () => {
   }
 };
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (
+  process.argv[1] &&
+  import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href
+) {
   void main();
 }
